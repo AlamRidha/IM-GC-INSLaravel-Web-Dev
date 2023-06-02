@@ -1,0 +1,53 @@
+1. Buat database
+CREATE DATABASE myshop
+
+2. Menggunakan database
+USE myshop
+
+3. Membuat table users
+CREATE TABLE users(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nama VARCHAR(255),
+	email VARCHAR(255),
+	passwd VARCHAR(255)
+)ENGINE=INNODB;
+
+4. Membuat tabel categories
+CREATE TABLE categories(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nama VARCHAR(255)
+)ENGINE=INNODB;
+
+5. Membuat tabel items
+CREATE TABLE items(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nama VARCHAR(255),
+	description VARCHAR(255),
+	price INT,
+	stock INT,
+	FOREIGN KEY (id) REFERENCES categories(id)
+)ENGINE=INNODB;
+
+6. Memasukkan nilai kedalam tabel users
+INSERT INTO users (nama,email) VALUES ("John Doe","john@doe.com")
+INSERT INTO users (nama,email) VALUES ("Jane Doe","jane@doe.com")
+
+7. Memasukkan nilai kedalam categories dan items
+INSERT INTO categories (nama) VALUES ("gadget"),("cloth"),("Men"),("Women"),("Branded")
+INSERT INTO items (nama,description) VALUES ("Sumsang b50","hape keren dari merek sumsang"),("uniklooh","baju keren dari brand ternama"),
+("IMHO Watch","jam tangan anak yang jujur banget")
+
+8. Menampilkan id, nama, email
+SELECT id,nama,email FROM users
+
+9. Menampilkan nama, description, price dengan harga diatas 1000000
+SELECT nama, description, price FROM items WHERE price>=1000000
+
+10. Menampilkan semua data dimana nama items serupa/ mirip dengan 'watch'
+SELECT * FROM items WHERE nama LIKE "%watch";
+
+11. Mengupdate items dengan nama 'Sumsang b50' dengan mengubah harga menjadi 2500000
+UPDATE items SET price=2500000 WHERE nama="Sumsang b50";
+
+12. Menjoinkan dari tabel items dengan tabel categories dengan kondisi id items sama dengan id categor
+SELECT items.`nama`, items.`description`, items.`price` FROM items INNER JOIN categories  ON items.`id`=categories.`id`
